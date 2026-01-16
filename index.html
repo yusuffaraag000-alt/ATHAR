@@ -1,0 +1,386 @@
+<!DOCTYPE html>
+<html lang="ar">
+<head>
+  <meta charset="UTF-8">
+  <title>أثر | ATHAR</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <!-- Google Fonts -->
+  <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@300;500;700&family=Montserrat:wght@300;600&display=swap" rel="stylesheet">
+
+  <style>
+    /* ===== Reset ===== */
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Cairo', sans-serif;
+      background: #000;
+      color: #fff;
+      overflow-x: hidden;
+    }
+
+    a {
+      text-decoration: none;
+      color: inherit;
+    }
+
+    /* ===== Prevent scroll during intro ===== */
+    body.no-scroll {
+      overflow: hidden;
+    }
+
+    /* ===== Navbar ===== */
+    nav {
+      position: fixed;
+      top: 0;
+      width: 100%;
+      padding: 20px 60px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      background: rgba(0,0,0,0.8);
+      z-index: 1000;
+    }
+
+    nav h1 {
+      font-size: 24px;
+      letter-spacing: 4px;
+      font-family: 'Montserrat', sans-serif;
+    }
+
+    nav ul {
+      display: flex;
+      gap: 30px;
+      list-style: none;
+    }
+
+    nav ul li {
+      font-size: 14px;
+      letter-spacing: 2px;
+      cursor: pointer;
+    }
+
+    /* ===== Hero Section ===== */
+    .hero {
+      height: 100vh;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      text-align: center;
+      flex-direction: column;
+    }
+
+    .hero h2 {
+      font-size: 80px;
+      letter-spacing: 10px;
+      animation: fadeUp 2s ease;
+    }
+
+    .hero p {
+      margin-top: 20px;
+      font-size: 18px;
+      letter-spacing: 4px;
+      opacity: 0.7;
+    }
+
+    .hero button {
+      margin-top: 40px;
+      padding: 15px 50px;
+      background: transparent;
+      border: 1px solid #fff;
+      color: #fff;
+      letter-spacing: 3px;
+      cursor: pointer;
+      transition: 0.3s;
+    }
+
+    .hero button:hover {
+      background: #fff;
+      color: #000;
+    }
+
+    /* ===== Shop Section ===== */
+    .shop {
+      background: #fff;
+      color: #000;
+      padding: 120px 80px;
+    }
+
+    .shop h3 {
+      text-align: center;
+      font-size: 40px;
+      letter-spacing: 5px;
+      margin-bottom: 60px;
+    }
+
+    .products {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 40px;
+    }
+
+    .product {
+      border: 1px solid #000;
+      padding: 30px;
+      text-align: center;
+      transition: 0.4s;
+      cursor: pointer;
+      background: #fff;
+    }
+
+    .product:hover {
+      background: #000;
+      color: #fff;
+    }
+
+    .product img {
+      width: 100%;
+      margin-bottom: 20px;
+      filter: grayscale(100%);
+      transition: 0.4s;
+    }
+
+    .product h4 {
+      font-size: 18px;
+      letter-spacing: 2px;
+    }
+
+    .product span {
+      display: block;
+      margin-top: 10px;
+      font-size: 14px;
+      opacity: 0.7;
+    }
+
+    /* ===== About ===== */
+    .about {
+      padding: 120px 80px;
+      text-align: center;
+    }
+
+    .about h3 {
+      font-size: 40px;
+      letter-spacing: 5px;
+      margin-bottom: 30px;
+    }
+
+    .about p {
+      max-width: 700px;
+      margin: auto;
+      font-size: 18px;
+      line-height: 1.8;
+      opacity: 0.8;
+    }
+
+    /* ===== Footer ===== */
+    footer {
+      background: #000;
+      border-top: 1px solid #fff;
+      padding: 40px;
+      text-align: center;
+      font-size: 14px;
+      letter-spacing: 2px;
+      opacity: 0.6;
+    }
+
+    /* ===== Animations ===== */
+    @keyframes fadeUp {
+      from {
+        opacity: 0;
+        transform: translateY(40px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    /* ===== Intro Transition ===== */
+    .intro {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100vh;
+      background: #000;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      z-index: 9999;
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity 0.5s ease;
+    }
+
+    .intro.active {
+      opacity: 1;
+      pointer-events: all;
+    }
+
+    .intro h1 {
+      font-size: 80px;
+      letter-spacing: 10px;
+      font-family: 'Montserrat', sans-serif;
+      transition: color 0.4s ease;
+    }
+
+    /* ===== Side Logo ===== */
+    .side-logo {
+      position: fixed;
+      left: 30px;
+      top: 50%;
+      transform: translateY(-50%);
+      width: 600px;
+      height: auto;
+      opacity: 0.8;
+      z-index: 200;
+      pointer-events: none;
+    }
+
+    /* ===== Responsive ===== */
+    @media (max-width: 768px) {
+      nav {
+        padding: 20px;
+      }
+
+      .hero h2,
+      .intro h1 {
+        font-size: 45px;
+      }
+
+      .shop, .about {
+        padding: 80px 20px;
+      }
+
+      .side-logo {
+        width: 35px;
+        left: 10px;
+      }
+    }
+  </style>
+</head>
+
+<body class="no-scroll">
+
+  <!-- Side Logo -->
+  <img src="side.svg" class="side-logo" alt="ATHAR LOGO">
+
+  <!-- Intro -->
+  <div class="intro" id="intro">
+    <h1 id="introText">IMPACT</h1>
+  </div>
+
+  <!-- Navbar -->
+  <nav>
+    <h1>ATHAR</h1>
+    <ul>
+      <li>HOME</li>
+      <li>SHOP</li>
+      <li>ABOUT</li>
+    </ul>
+  </nav>
+
+  <!-- Hero -->
+  <section class="hero">
+    <h2>أثــر</h2>
+    <p>WEAR YOUR IMPACT</p>
+    <button id="shopBtn">SHOP NOW</button>
+  </section>
+
+  <!-- Shop -->
+  <section class="shop" id="shop">
+    <h3>COLLECTION</h3>
+
+    <div class="products">
+      <div class="product">
+        <img src="https://via.placeholder.com/300x400/000000/FFFFFF?text=ATHAR" alt="MEN">
+        <h4>MANE</h4>
+      </div>
+
+      <div class="product">
+        <img src="https://via.placeholder.com/300x400/FFFFFF/000000?text=ATHAR" alt="WOMEN">
+        <h4>WOMEN</h4>
+      </div>
+
+      <div class="product">
+        <img src="https://via.placeholder.com/300x400/000000/FFFFFF?text=IMPACT" alt="UNISEX">
+        <h4>Unisex</h4>
+      </div>
+    </div>
+  </section>
+
+  <!-- About -->
+  <section class="about">
+    <h3>ABOUT ATHAR</h3>
+    <p>
+      أثر ليس مجرد تيشيرت.  
+      هو موقف، حضور، وبصمة تتركها أينما كنت.  
+      نصمم البساطة لتكون أقوى من أي ضجيج.
+    </p>
+  </section>
+
+  <!-- Footer -->
+  <footer>
+    © 2026 ATHAR — ALL RIGHTS RESERVED
+  </footer>
+
+  <script>
+    const intro = document.getElementById("intro");
+    const introText = document.getElementById("introText");
+    const shopBtn = document.getElementById("shopBtn");
+    const body = document.body;
+
+    const words = [
+      { text: "IMPACT", bg: "#000", color: "#fff" },
+      { text: "IDENTITY", bg: "#fff", color: "#000" },
+      { text: "SIMPLICITY", bg: "#000", color: "#fff" },
+      { text: "ATHAR", bg: "#fff", color: "#000" }
+    ];
+
+    function startIntro(scrollTargetId) {
+      body.classList.add("no-scroll"); // منع الاسكرول
+      intro.classList.add("active");
+      let index = 0;
+
+      function showWord() {
+        const word = words[index];
+        intro.style.background = word.bg;
+        introText.style.color = word.color;
+        introText.textContent = word.text;
+        index++;
+
+        if (index < words.length) {
+          setTimeout(showWord, 900);
+        } else {
+          setTimeout(() => {
+            intro.classList.remove("active");
+            body.classList.remove("no-scroll"); // إعادة السماح بالScroll
+            if (scrollTargetId) {
+              document.getElementById(scrollTargetId).scrollIntoView({ behavior: "smooth" });
+            }
+          }, 900);
+        }
+      }
+
+      showWord();
+    }
+
+    // SHOP NOW button
+    shopBtn.addEventListener("click", () => {
+      startIntro("shop");
+    });
+
+    // Navbar clicks
+    document.querySelectorAll("nav ul li").forEach(item => {
+      item.addEventListener("click", () => {
+        startIntro();
+      });
+    });
+  </script>
+
+</body>
+</html>
